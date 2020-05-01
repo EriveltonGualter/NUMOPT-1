@@ -52,13 +52,12 @@ hTaylor = surf(X, Y, T);
 while waitforbuttonpress == 0
 end
 
-%% ========================================================================
+%% main loop ==============================================================
 for iterIndex = 1 : maxIter
     x = Newton_noLS(f, df, ddf, x, 1);
 
     for i=1:res
         for j=1:res
-            Z(j, i) = f([X(i); Y(j)]);
             T(j, i) = t2(x, [X(i); Y(j)]);
         end
     end
@@ -72,7 +71,7 @@ for iterIndex = 1 : maxIter
     end
 end
 
-% Functions
+%% Functions
 function [ x ] = Newton_noLS(~,df,ddf,x0,iter)
     % f: vector->scalar objective function; not used!
     % df: gradient function

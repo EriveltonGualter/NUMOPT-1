@@ -6,20 +6,34 @@
 % Which known algorithm would you recommend to solve the problem with?
 % Demonstrate an approximate solution for a parameter setting of your choice.
 
+% Basically, the function we want to minimize, is the reciprocal sum, of
+% each point-pairs distance, since every other part is a constant. We do
+% not take into account, the distance between fixed points, wince that is
+% also a constant. For this minimization problem, I choosed Newton's method
+% and I calculated the derivatives analytically. I choosed this method
+% because I wanted to try it, since I worked more with gradient methods.
+% Also I choosed not to approximate the functions, only because that was my
+% first idea and I did not want to give up on it. This way, this is far
+% from the best solution, which I think would use a gradient-based method.
+% I noticed some cases where the solution doesn't seem like a local minimum
+% so I am not totally sure, that my program is correct.
+% USAGE: HOLD DOWN ANY KEY TO SEE THE ANIMATION
+
 %% ========================================================================
 % parameter setting
 clc, clear all
 global fixedPoints
 global radius
-fixedPoints = [[0, 8]; [8, 0]; [0, -8]; [5.5, 5.5]; [5.5, -5.5]];
-fixedPoints = [[0, 8]; [8, 0]; [5.5, 5.5]];
+%fixedPoints = [[0, 8]; [8, 0]; [0, -8]; [5.5, 5.5]; [5.5, -5.5]];
+%fixedPoints = [[0, 8]; [8, 0]; [5.5, 5.5]];
 %fixedPoints = [[0, 10]; [0, -10]];
 %fixedPoints = [[3, 4]; [0, 5]; [4, 3]];
+fixedPoints = [[3, 4]; [0, 5]; [4, 3]; [4, 4]; [2, 3]; [3.3, -3.3]];
 %fixedPoints = [1, 4];
-fixedPoints = zeros(15, 2);
-fixedPoints(:, 1) = -7 : 7;
-radius = 3;
-numPointsToPlace = 4;
+%fixedPoints = zeros(15, 2);
+%fixedPoints(:, 1) = -7 : 7;
+radius = 5;
+numPointsToPlace =19;
 
 %% ========================================================================
 % create initial random values and plot them
@@ -191,7 +205,7 @@ function [ x ] = optimizeWithNewtonNoLSAndPlot(x0, iter)
     end
 end
 
-%% ================No linesearch works better for me...==================== 
+%% ===============No linesearch worked better for me...==================== 
 % function [ x ] = optimizeWithNewtonLSAndPlot(x0, iter)
 % % f: vector->scalar objective function
 % % df: gradient function
